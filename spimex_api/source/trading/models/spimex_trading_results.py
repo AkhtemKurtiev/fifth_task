@@ -7,10 +7,10 @@ from sqlalchemy import Column, Date, DateTime, Integer, String
 from database import BaseModel
 
 
-class Spimex_trading_results_two(BaseModel):
+class Spimex_trading_results(BaseModel):
     """Класс модели Spimex_trading_results."""
 
-    __tablename__ = 'spimex_trading_results_two'
+    __tablename__ = 'spimex_trading_results'
 
     id = Column(Integer, primary_key=True)
     exchange_product_id = Column(String(15))
