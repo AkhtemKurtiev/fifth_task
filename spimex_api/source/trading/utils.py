@@ -28,3 +28,11 @@ def params_filter(
             Spimex_trading_results.delivery_basis_id == delivery_basis_id
         )
     return query
+
+
+def add_params_in_router(
+    oil_id: Optional[str] = None,
+    delivery_type_id: Optional[str] = None,
+    delivery_basis_id: Optional[str] = None,
+):
+    return oil_id, delivery_type_id, delivery_basis_id

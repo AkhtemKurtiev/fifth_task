@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_async_session
 from trading.models.spimex_trading_results import Spimex_trading_results
 from .schemas import Spimex_trading_resultsCreate
-from .utils import params_filter
+from .utils import add_params_in_router, params_filter
 
 router = APIRouter(
     prefix='/trading_result',
@@ -47,11 +47,9 @@ async def get_last_trading_dates(
 )
 @cache(expire=120)
 async def get_dynamics(
-    oil_id: Optional[str] = None,
-    delivery_type_id: Optional[str] = None,
-    delivery_basis_id: Optional[str] = None,
     start_date: date = Query('2024-07-12'),
     end_date: date = Query('2024-07-13'),
+    add_params_in_router: tuple = Depends(add_params_in_router),
     session: AsyncSession = Depends(get_async_session)
 ):
     try:
@@ -59,7 +57,7 @@ async def get_dynamics(
             Spimex_trading_results.date.between(start_date, end_date)
             ).order_by(
             desc(Spimex_trading_results.date))
-        query = params_filter(query, oil_id, delivery_type_id, delivery_basis_id)
+        query = params_filter(query, *add_params_in_router)
         result = await session.execute(query)
         return result.scalars().all()
     except Exception:
@@ -77,15 +75,13 @@ async def get_dynamics(
 @cache(expire=120)
 async def get_trading_results(
     count_last_day: int = 10,
-    oil_id: Optional[str] = None,
-    delivery_type_id: Optional[str] = None,
-    delivery_basis_id: Optional[str] = None,
+    add_params_in_router: tuple = Depends(add_params_in_router),
     session: AsyncSession = Depends(get_async_session)
 ):
     try:
         query = select(Spimex_trading_results).order_by(
             desc(Spimex_trading_results.date)).limit(count_last_day)
-        query = params_filter(query, oil_id, delivery_type_id, delivery_basis_id)
+        query = params_filter(query, *add_params_in_router)
         result = await session.execute(query)
         return result.scalars().all()
     except Exception:
