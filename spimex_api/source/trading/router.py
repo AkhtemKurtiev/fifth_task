@@ -72,7 +72,7 @@ async def get_trading_results(
     session: AsyncSession = Depends(get_async_session)
 ):
     try:
-        return  await SpimexRepository.get_trading_results(
+        return await SpimexRepository.get_trading_results(
             count_last_day,
             add_params_in_router,
             session
