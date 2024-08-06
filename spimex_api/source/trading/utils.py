@@ -30,7 +30,7 @@ def params_filter(
     return query
 
 
-def add_params_in_router(
+def add_params_in_router_filter(
     oil_id: Optional[str] = None,
     delivery_type_id: Optional[str] = None,
     delivery_basis_id: Optional[str] = None,
