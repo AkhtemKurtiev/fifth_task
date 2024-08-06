@@ -86,3 +86,16 @@ async def get_trading_results(
             'data': None,
             'detail': None
         })
+
+
+# def func():
+#     a = 1
+#     yield a
+#     b = 2
+#     yield b
+#     print("Stop")
+
+
+# @router.get("/")
+# async def hello(data=Depends(func)):
+#     return {"data": data}
