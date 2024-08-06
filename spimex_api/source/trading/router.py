@@ -26,7 +26,10 @@ async def get_last_trading_dates(
     session: AsyncSession = Depends(get_async_session)
 ):
     try:
-        return await SpimexRepository.get_last_trading_dates(count_last_day, session)
+        return await SpimexRepository.get_last_trading_dates(
+            count_last_day,
+            session
+        )
     except Exception:
         raise HTTPException(status_code=500, detail={
             'status': 'error',
