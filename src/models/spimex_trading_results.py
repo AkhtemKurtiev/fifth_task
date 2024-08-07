@@ -4,7 +4,7 @@ from datetime import datetime
 
 from sqlalchemy import Column, Date, DateTime, Integer, String
 
-from database import BaseModel
+from src.database.db import BaseModel
 
 
 class Spimex_trading_results(BaseModel):

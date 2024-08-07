@@ -2,7 +2,7 @@ from typing import Optional, Tuple
 
 from sqlalchemy import Select
 
-from trading.models.spimex_trading_results import Spimex_trading_results
+from src.models.spimex_trading_results import Spimex_trading_results
 
 
 def string_to_date(date: str):
@@ -35,4 +35,8 @@ def add_params_in_router_filter(
     delivery_type_id: Optional[str] = None,
     delivery_basis_id: Optional[str] = None,
 ):
-    return oil_id, delivery_type_id, delivery_basis_id
+    return {
+        'oil_id': oil_id,
+        'delivery_type_id': delivery_type_id,
+        'delivery_basis_id': delivery_basis_id
+    }

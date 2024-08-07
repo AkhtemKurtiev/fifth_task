@@ -5,9 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-from database import BaseModel
-from trading.models.spimex_trading_results import Spimex_trading_results_two
+from src.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
+from src.database.db import BaseModel
+from src.models.spimex_trading_results import Spimex_trading_results
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
