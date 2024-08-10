@@ -4,7 +4,6 @@ from fastapi import HTTPException
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.api.v1.utils.utils import params_filter
 from src.models.spimex_trading_results import Spimex_trading_results
 from src.utils.service import BaseService
 from src.utils.unit_of_work import transaction_mode
