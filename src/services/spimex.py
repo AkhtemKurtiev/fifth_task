@@ -55,7 +55,9 @@ class SpimexService(BaseService):
         try:
             kwargs = {'date': (start_date, end_date)}
             kwargs = params_to_dict(kwargs, add_params_in_router)
-            result = await self.uow.spimex.get_by_query_all(**kwargs)
+            result = (
+                await self.uow.spimex.get_by_query_all(**kwargs)
+            )
             return result
         except Exception as e:
             print(e)
@@ -74,7 +76,9 @@ class SpimexService(BaseService):
         try:
             kwargs = {}
             kwargs = params_to_dict(kwargs, add_params_in_router)
-            results = await self.uow.spimex.get_by_query_all(**kwargs)
+            results = (
+                await self.uow.spimex.get_by_query_all(**kwargs)
+            )
             return results[:count_last_day]
         except Exception as e:
             print(e)

@@ -77,7 +77,7 @@ class SqlAlchemyRepository(AbstractRepository):
 
     async def update_one_by_id(
             self, _id: Union[int, str, uuid4], values:dict
-    ) -> type(model)| None:
+    ) -> type(model) | None:
         query = update(self.model).filter(
             self.model.id == _id).values(**values).returning(self.model)
         _obj: Result | None = await self.session.execute(query)
