@@ -35,7 +35,7 @@ async def get_last_trading_dates(
 async def get_dynamics(
     start_date: date = Query('2024-07-12'),
     end_date: date = Query('2024-07-13'),
-    add_params_in_router: tuple = Depends(add_params_in_router_filter),
+    add_params_in_router: dict = Depends(add_params_in_router_filter),
     service: SpimexService = Depends(SpimexService)
 ):
     return await service.get_dynamics(
@@ -50,7 +50,7 @@ async def get_dynamics(
 @cache(expire=120)
 async def get_trading_results(
     count_last_day: int = 10,
-    add_params_in_router: tuple = Depends(add_params_in_router_filter),
+    add_params_in_router: dict = Depends(add_params_in_router_filter),
     service: SpimexService = Depends(SpimexService)
 ):
     return await service.get_trading_results(

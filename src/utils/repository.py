@@ -68,7 +68,9 @@ class SqlAlchemyRepository(AbstractRepository):
         query = select(self.model)
         for key, value in kwargs.items():
             if isinstance(value, tuple) and len(value) == 2:
-                query = query.filter(getattr(self.model, key).between(value[0], value[1]))
+                query = query.filter(
+                    getattr(self.model, key).between(value[0], value[1])
+                )
             else:
                 query = query.filter_by(**{key: value})
 

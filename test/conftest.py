@@ -2,6 +2,9 @@ import asyncio
 from typing import AsyncGenerator
 
 from fastapi.testclient import TestClient
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+from redis import asyncio as aioredis
 import pytest
 from httpx import AsyncClient
 from sqlalchemy import Column, Integer, String
@@ -83,15 +86,12 @@ client = TestClient(app)
 
 @pytest.fixture(scope='session')
 async def ac() -> AsyncGenerator[AsyncClient, None]:
+    redis = aioredis.from_url(
+        'redis://localhost',
+        encoding='utf-8',
+        decode_response=True
+    )
+    FastAPICache.init(RedisBackend(redis), prefix='fastapi-cache')
     async with AsyncClient(app=app, base_url='http://test') as ac:
         yield ac
-
-
-@pytest.fixture
-async def repository(async_session: AsyncSession) -> TestModelRepository:
-    return TestModelRepository(session=async_session)
-
-
-# @pytest.fixture(autouse=True, scope='function')
-# async def drop_all_before(repository: TestModelRepository):
-#     await repository.delete_all()
+    await redis.close()

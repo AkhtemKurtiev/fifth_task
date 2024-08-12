@@ -3,7 +3,7 @@ import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.repositories.spimex import SpimexRepository
-from test.conftest import TestModel, TestModelRepository
+from test.unit.conftest import TestModelRepository
 
 
 class TestRepository:

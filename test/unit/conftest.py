@@ -1,7 +1,16 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock
+from sqlalchemy import Column, Integer, String
 
-from src.utils.unit_of_work import UnitOfWork, transaction_mode
+from test.conftest import BaseModel
+from src.services.spimex import SpimexService
+from src.utils.repository import SqlAlchemyRepository
+from src.utils.unit_of_work import UnitOfWork
+from test.conftest import AsyncSession, TestModelRepository
+
+
+@pytest.fixture
+async def repository(async_session: AsyncSession) -> TestModelRepository:
+    return TestModelRepository(session=async_session)
 
 
 @pytest.fixture
@@ -33,3 +42,17 @@ def uow(mocker, mock_session_factory, mock_spimex_repository):
     uow = UnitOfWork()
     uow.spimex = mock_spimex_repository
     return uow
+
+
+@pytest.fixture
+def mock_uow(mocker):
+    mock_uow = mocker.MagicMock()
+    mock_uow.spimex.get_by_query_all = mocker.AsyncMock()
+    return mock_uow
+
+
+@pytest.yield_fixture
+def spimex_service(mock_uow):
+    service = SpimexService()
+    service.uow = mock_uow
+    return service

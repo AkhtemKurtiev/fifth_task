@@ -1,7 +1,5 @@
 import pytest
 
-from src.utils.unit_of_work import transaction_mode
-
 
 class TestUnitOfWork:
     async def test_commit(self, uow, mock_session):
