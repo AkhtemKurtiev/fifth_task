@@ -42,7 +42,7 @@ jobs:
         done
 
     - name: Run tests
-      env:
+      test.env:
         DB_USER_TEST: test_user
         DB_PASS_TEST: test_password
         DB_HOST_TEST: localhost
