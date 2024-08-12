@@ -1,9 +1,6 @@
 import pytest
-from sqlalchemy import Column, Integer, String
 
-from test.conftest import BaseModel
 from src.services.spimex import SpimexService
-from src.utils.repository import SqlAlchemyRepository
 from src.utils.unit_of_work import UnitOfWork
 from test.conftest import AsyncSession, TestModelRepository
 

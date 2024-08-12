@@ -1,8 +1,3 @@
-
-import pytest
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from src.repositories.spimex import SpimexRepository
 from test.unit.conftest import TestModelRepository
 
 
